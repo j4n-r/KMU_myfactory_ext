@@ -1,0 +1,94 @@
+#+title: Notes
+/* (c) myfactory Software 2000-2006 */
+
+url: https://myfactory.privatecloud.mobi/HWR/ie50/system/login/sysloginbackground.aspx?login=start&apptype=-3
+
+* Flow
+1. send reconnect request with usr and encode pw
+2. set cookie to the response cookie
+3. the rest
+
+** pw encoding
+
+    #+BEGIN_SRC js
+      function encodeString(sValue) {
+          let encoded = '';
+          for (let i = 0; i < sValue.length; i++) {
+              // Add 255 to the ASCII value of the character
+              encoded += (sValue.charCodeAt(i) + 255) + 'O';
+          }
+          return encoded;
+      }
+
+      // Test with "Hello"
+      let originalString = "Hello";
+      let encodedString = encodeString(originalString);
+      console.log(encodedString)
+    #+END_SRC
+
+    #+RESULTS:
+    : 327O356O363O363O366O
+
+** request
+POST /HWR/ie50/system/login/syslogindatabase.aspx HTTP/1.1
+Host: myfactory.privatecloud.mobi
+Cookie: mfBrowserCacheVersion2=8-0-313; wfClientID_WS040=wfa3b1400f-a
+Content-Length: 41
+Cache-Control: max-age=0
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Linux"
+Accept-Language: en-US,en;q=0.9
+Origin: https://myfactory.privatecloud.mobi
+Content-Type: application/x-www-form-urlencoded
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: iframe
+Referer: https://myfactory.privatecloud.mobi/HWR/ie50/system/login/SysLoginUser.aspx?AppType=-3
+Accept-Encoding: gzip, deflate, br
+Priority: u=0, i
+Connection: keep-alive
+
+UID=ws24_user_40&PWD=335O342O350O307O303O
+
+** reconnect
+POST /HWR/ie50/system/login/syslogindatabase.aspx?Login=Reconnect HTTP/1.1
+Host: myfactory.privatecloud.mobi
+Cookie: mfBrowserCacheVersion2=8-0-313; wfClientID_WS040=wfa3b1400f-a
+Content-Length: 41
+Cache-Control: max-age=0
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Linux"
+Accept-Language: en-US,en;q=0.9
+Origin: https://myfactory.privatecloud.mobi
+Content-Type: application/x-www-form-urlencoded
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: iframe
+Referer: https://myfactory.privatecloud.mobi/HWR/ie50/system/login/SysLoginUser.aspx?Login=Exists&UID=ws24_user_40&Lang=D
+Accept-Encoding: gzip, deflate, br
+Priority: u=0, i
+Connection: keep-alive
+
+UID=ws24_user_40&PWD=335O342O350O307O303O
+
+** response
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Pragma: no-cache
+Content-Type: text/html; charset=utf-8
+Expires: -1
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+Set-Cookie: wfClientID_WS040=wf98dc60c3-f; expires=Mon, 25-Nov-2024 23:00:00 GMT; path=/; HttpOnly; SameSite=Lax
+X-Powered-By: ASP.NET
+Date: Thu, 21 Nov 2024 20:42:55 GMT
+Content-Length: 3324
