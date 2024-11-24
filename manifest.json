@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "myfactoray ext",
+  "description": "",
+  "version": "0.1",
+  "permissions": ["tabs", "sidePanel"],
+  "side_panel": {
+    "default_path": "sidepanels/login.html"
+  },
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
