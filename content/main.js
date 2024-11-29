@@ -28,23 +28,6 @@ function createOverlay() {
   const overlay = document.createElement("div");
   overlay.id = "overlay";
 
-  overlay.style.position = "fixed";
-  overlay.style.top = "200px";
-  overlay.style.right = "0";
-  overlay.style.width = "10vw";
-  overlay.style.height = "50vh";
-  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  overlay.style.zIndex = "9999"; // Ensure it's on top
-  overlay.style.display = "flex";
-  overlay.style.alignItems = "center";
-  overlay.style.justifyContent = "center";
-  overlay.style.color = "white";
-  overlay.style.fontSize = "24px";
-  overlay.style.fontWeight = "bold";
-  overlay.style.flexDirection = "column";
-  overlay.style.borderRadius = "10px 0px 0px 10px";
-  overlay.style.padding = "10px";
-
   overlay.textContent = "DOM change detected!";
 
   const nextButton = document.createElement("button");

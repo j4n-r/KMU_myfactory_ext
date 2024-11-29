@@ -23,8 +23,14 @@
       "matches": [
         "https://myfactory.privatecloud.mobi/HWR/ie50/system/workplace50/workplacemain.aspx*"
       ],
-      "js": ["content.js"],
+      "js": ["content/main.js"],
       "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["content/content.css"],
+      "matches": ["https://myfactory.privatecloud.mobi/*"]
     }
   ]
 }
